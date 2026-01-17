@@ -1,0 +1,128 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reachy_mini_elevenlabs"
+version = "0.1.0"
+authors = [
+    { name = "mindmodel.ai", email = "contact@mindmodel.ai" },
+    { name = "ageai.io", email = "contact@ageai.io" }
+]
+description = "ElevenLabs Conversational AI for Reachy Mini by mindmodel.ai & ageai.io"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+keywords = ["reachy-mini", "elevenlabs", "conversational-ai", "robotics", "voice-assistant", "mindmodel", "ageai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.urls]
+Homepage = "https://mindmodel.ai"
+Documentation = "https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs"
+Repository = "https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs"
+"Bug Tracker" = "https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs/discussions"
+"mindmodel.ai" = "https://mindmodel.ai"
+"ageai.io" = "https://ageai.io"
+dependencies = [
+    # ElevenLabs SDK
+    "elevenlabs>=1.0.0",
+
+    # Environment variables
+    "python-dotenv",
+
+    # Reachy mini
+    "reachy_mini>=1.2.7",
+    "reachy_mini_dances_library",
+    "reachy_mini_toolbox",
+
+    # Media
+    "opencv-python>=4.12.0.88",
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "hypothesis",
+    "ruff==0.12.0",
+    "mypy==1.18.2",
+    "pre-commit",
+]
+
+[project.scripts]
+reachy-mini-elevenlabs = "reachy_mini_elevenlabs.main:main"
+
+[project.entry-points."reachy_mini_apps"]
+reachy_mini_elevenlabs = "reachy_mini_elevenlabs.main:ReachyMiniElevenLabsApp"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+reachy_mini_elevenlabs = [
+    "static/*",
+    ".env.example",
+]
+
+[tool.ruff]
+line-length = 119
+exclude = [".venv", "dist", "build", "**/__pycache__", "*.egg-info", ".mypy_cache", ".pytest_cache"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "C4",  # flake8-comprehensions
+    "D",   # pydocstyle
+]
+ignore = [
+    "E501",  # handled by formatter
+    "D100",  # ignore missing module docstrings
+    "D203",  # blank line before class docstring (conflicts with D211)
+    "D213",  # summary on second line (conflicts with D212)
+]
+
+[tool.ruff.lint.isort]
+length-sort = true
+lines-after-imports = 2
+no-lines-before = ["standard-library", "local-folder"]
+known-local-folder = ["reachy_mini_elevenlabs"]
+known-first-party = ["reachy_mini", "reachy_mini_dances_library", "reachy_mini_toolbox"]
+split-on-trailing-comma = true
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/"]
+ignore_missing_imports = true
+strict = true
+show_error_codes = true
+warn_unused_ignores = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "pbt: Property-based tests using hypothesis",
+]
