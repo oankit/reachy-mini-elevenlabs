@@ -14,7 +14,7 @@ tags:
   - voice-assistant
   - mindmodel
   - ageai
-short_description: ElevenLabs Conversational AI for Reachy Mini by mindmodel.ai - natural voice conversations with your robot
+short_description: Natural voice conversations for Reachy Mini by mindmodel.ai
 ---
 
 # 🤖💬 Reachy Mini ElevenLabs Conversation
