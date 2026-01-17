@@ -63,7 +63,7 @@ dev = [
 reachy-mini-elevenlabs = "reachy_mini_elevenlabs.main:main"
 
 [project.entry-points."reachy_mini_apps"]
-reachy_mini_elevenlabs = "reachy_mini_elevenlabs.main:ReachyMiniElevenLabsApp"
+reachy_mini_elevenlabs = "reachy_mini_elevenlabs.main:ReachyMiniElevenlabs"
 
 [tool.setuptools]
 include-package-data = true

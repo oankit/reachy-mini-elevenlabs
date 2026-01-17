@@ -235,7 +235,7 @@ def run(
         app_logger.info("Shutdown complete.")
 
 
-class ReachyMiniElevenLabsApp(ReachyMiniApp):  # type: ignore[misc]
+class ReachyMiniElevenlabs(ReachyMiniApp):  # type: ignore[misc]
     """Reachy Mini Apps entry point for the ElevenLabs conversation app.
 
     This class extends ReachyMiniApp to integrate with the Reachy Mini
@@ -278,7 +278,7 @@ class ReachyMiniElevenLabsApp(ReachyMiniApp):  # type: ignore[misc]
 
 
 if __name__ == "__main__":
-    app = ReachyMiniElevenLabsApp()
+    app = ReachyMiniElevenlabs()
     try:
         app.wrapped_run()
     except KeyboardInterrupt:
