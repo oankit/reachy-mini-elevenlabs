@@ -153,6 +153,7 @@ Apache License 2.0 - See [LICENSE](LICENSE) for details.
 
 ## Links
 
+- **[hf.mindmodel.ai](https://hf.mindmodel.ai)** - View this app live
 - **[mindmodel.ai](https://mindmodel.ai)** - Explore our AI solutions
 - **[ageai.io](https://ageai.io)** - Advanced AI research and applications
 - [ElevenLabs Conversational AI](https://try.elevenlabs.io/reachy-mini-agents)
@@ -161,8 +162,9 @@ Apache License 2.0 - See [LICENSE](LICENSE) for details.
 
 ## Support
 
+- **App**: [hf.mindmodel.ai](https://hf.mindmodel.ai)
 - **Website**: [mindmodel.ai](https://mindmodel.ai) | [ageai.io](https://ageai.io)
-- **Issues**: Report bugs or request features on the [GitHub repository](https://github.com/mindmodel-ai/reachy_mini_elevenlabs)
+- **Issues**: Report bugs or request features on [HuggingFace Discussions](https://huggingface.co/spaces/mindmodelai/reachy-mini-elevenlabs/discussions)
 - **Community**: Join the [Reachy Mini Discord](https://discord.gg/pollen-robotics)
 
 ---

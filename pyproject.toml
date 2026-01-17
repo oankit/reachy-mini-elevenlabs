@@ -42,10 +42,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://mindmodel.ai"
-Documentation = "https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs"
-Repository = "https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs"
-"Bug Tracker" = "https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs/discussions"
+Homepage = "https://hf.mindmodel.ai"
+Documentation = "https://hf.mindmodel.ai"
+Repository = "https://huggingface.co/spaces/mindmodelai/reachy-mini-elevenlabs"
+"Bug Tracker" = "https://huggingface.co/spaces/mindmodelai/reachy-mini-elevenlabs/discussions"
 "mindmodel.ai" = "https://mindmodel.ai"
 "ageai.io" = "https://ageai.io"
 
