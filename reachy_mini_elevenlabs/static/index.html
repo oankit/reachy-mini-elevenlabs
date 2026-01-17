@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reachy Mini ElevenLabs – Settings</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="ambient"></div>
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading…</p>
+    </div>
+    <div class="container">
+      <header class="hero">
+        <div class="pill">Headless control</div>
+        <h1>Reachy Mini ElevenLabs</h1>
+        <p class="subtitle">Configure your ElevenLabs API key and Agent ID for voice conversations.</p>
+      </header>
+
+      <div id="configured" class="panel hidden">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Credentials</p>
+            <h2>Configuration ready</h2>
+          </div>
+          <span class="chip chip-ok">Connected</span>
+        </div>
+        <p class="muted">ElevenLabs API key and Agent ID are configured. The conversation app is ready to run.</p>
+        <button id="change-config-btn" class="ghost">Change configuration</button>
+      </div>
+
+      <div id="form-panel" class="panel hidden">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Credentials</p>
+            <h2>Connect ElevenLabs</h2>
+          </div>
+          <span class="chip">Required</span>
+        </div>
+        <p class="muted">Enter your ElevenLabs credentials to enable voice conversations. API key is optional for public agents.</p>
+        
+        <label for="agent-id">Agent ID <span class="required">*</span></label>
+        <input id="agent-id" type="text" placeholder="agent_..." autocomplete="off" required />
+        <p class="hint">Find your Agent ID in the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank">Conversational AI section</a>.</p>
+        
+        <label for="api-key">ElevenLabs API Key <span class="optional">(optional for public agents)</span></label>
+        <input id="api-key" type="password" placeholder="sk_..." autocomplete="off" />
+        <p class="hint">Get your API key from the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank">ElevenLabs dashboard</a>. Only required for private agents.</p>
+        
+        <div class="actions">
+          <button id="save-btn">Save configuration</button>
+          <p id="status" class="status"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/main.js"></script>
+  </body>
+</html>

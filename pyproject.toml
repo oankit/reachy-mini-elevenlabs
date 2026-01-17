@@ -66,11 +66,10 @@ reachy-mini-elevenlabs = "reachy_mini_elevenlabs.main:main"
 reachy_mini_elevenlabs = "reachy_mini_elevenlabs.main:ReachyMiniElevenLabsApp"
 
 [tool.setuptools]
-package-dir = { "" = "src" }
 include-package-data = true
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
 
 [tool.setuptools.package-data]
 reachy_mini_elevenlabs = [
