@@ -51,8 +51,8 @@ From the Reachy Mini Control application:
 
 You'll need an ElevenLabs Conversational AI agent:
 
-1. Sign up at [ElevenLabs](https://elevenlabs.io/)
-2. Navigate to the [Conversational AI](https://elevenlabs.io/app/conversational-ai) section
+1. Sign up at [ElevenLabs](https://try.elevenlabs.io/reachy-mini-agents)
+2. Navigate to the [Conversational AI](https://try.elevenlabs.io/reachy-mini-agents) section
 3. Create a new agent or use an existing one
 4. Copy your **Agent ID** (starts with `agent_`)
 5. (Optional) Copy your **API Key** if using a private agent
@@ -153,7 +153,7 @@ Apache License 2.0 - See [LICENSE](LICENSE) for details.
 
 - **[mindmodel.ai](https://mindmodel.ai)** - Explore our AI solutions
 - **[ageai.io](https://ageai.io)** - Advanced AI research and applications
-- [ElevenLabs Conversational AI](https://elevenlabs.io/conversational-ai)
+- [ElevenLabs Conversational AI](https://try.elevenlabs.io/reachy-mini-agents)
 - [Reachy Mini Documentation](https://docs.pollen-robotics.com/sdk/reachy-mini/)
 - [Reachy Mini Apps](https://huggingface.co/reachy-mini-apps)
 
