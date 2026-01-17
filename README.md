@@ -7,6 +7,8 @@ sdk: static
 pinned: false
 license: apache-2.0
 tags:
+  - reachy_mini
+  - reachy_mini_python_app
   - reachy-mini
   - elevenlabs
   - conversational-ai
@@ -17,27 +19,27 @@ tags:
 short_description: Natural voice conversations for Reachy Mini by mindmodel.ai
 ---
 
-# 🤖💬 Reachy Mini ElevenLabs Conversation
+# Reachy Mini ElevenLabs Conversation
 
 **By [mindmodel.ai](https://mindmodel.ai) & [ageai.io](https://ageai.io)**
 
 Transform your Reachy Mini into an intelligent conversational companion using ElevenLabs' advanced Conversational AI platform.
 
-> 🌟 **Open source project** from the teams at [mindmodel.ai](https://mindmodel.ai) and [ageai.io](https://ageai.io) - building the future of AI-powered robotics.
+> Open source project from the teams at mindmodel.ai and ageai.io - building the future of AI-powered robotics.
 
-## ✨ Features
+## Features
 
-- 🎙️ **Natural Voice Conversations** - Speak naturally with your robot using ElevenLabs' state-of-the-art speech recognition
-- 🗣️ **Expressive Speech Synthesis** - High-quality, natural-sounding voice responses
-- 🎭 **Animated Responses** - Synchronized head movements and lip-sync animations during conversation
-- ⚙️ **Easy Configuration** - Simple web-based settings interface for agent setup
-- 🔌 **One-Click Install** - Install directly from the Reachy Mini Control app
+- **Natural Voice Conversations** - Speak naturally with your robot using ElevenLabs' state-of-the-art speech recognition
+- **Expressive Speech Synthesis** - High-quality, natural-sounding voice responses
+- **Animated Responses** - Synchronized head movements and lip-sync animations during conversation
+- **Easy Configuration** - Simple web-based settings interface for agent setup
+- **One-Click Install** - Install directly from the Reachy Mini Control app
 
-## 🎬 Demo
+## Demo
 
 [Add a demo video or GIF here showing the robot having a conversation]
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install the App
 
@@ -75,7 +77,7 @@ Once configured, the app will automatically:
 
 Just speak naturally to your Reachy Mini and it will respond!
 
-## 🎯 Use Cases
+## Use Cases
 
 - **Personal Assistant** - Schedule reminders, answer questions, control smart home devices
 - **Educational Companion** - Interactive learning experiences for students
@@ -83,7 +85,7 @@ Just speak naturally to your Reachy Mini and it will respond!
 - **Entertainment** - Storytelling, jokes, and interactive games
 - **Accessibility** - Voice-controlled interface for users with mobility challenges
 
-## ⚙️ Configuration Options
+## Configuration Options
 
 ### Agent ID (Required)
 Your ElevenLabs Conversational AI agent identifier. This determines the personality, voice, and capabilities of your robot.
@@ -91,11 +93,11 @@ Your ElevenLabs Conversational AI agent identifier. This determines the personal
 ### API Key (Optional)
 Only required for private agents. Public agents can be used without an API key.
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### Audio Processing
-- **Input**: Robot microphone at 44.1kHz (stereo) → resampled to 16kHz mono
-- **Output**: ElevenLabs audio at 16kHz → played through robot speaker
+- **Input**: Robot microphone at 44.1kHz (stereo) - resampled to 16kHz mono
+- **Output**: ElevenLabs audio at 16kHz - played through robot speaker
 - **Format**: 16-bit PCM audio for optimal quality
 
 ### Animation System
@@ -104,18 +106,18 @@ Only required for private agents. Public agents can be used without an API key.
 - **Interruption Handling**: Smooth transitions when user interrupts the robot
 
 ### Supported Platforms
-- ✅ Windows (Reachy Mini Control app)
-- ✅ Linux (Reachy Mini Control app)
-- ✅ Raspberry Pi (Reachy Mini Wireless)
+- Windows (Reachy Mini Control app)
+- Linux (Reachy Mini Control app)
+- Raspberry Pi (Reachy Mini Wireless)
 
-## 📋 Requirements
+## Requirements
 
 - Reachy Mini robot (Lite or Wireless version)
 - Internet connection for ElevenLabs API
 - ElevenLabs account with Conversational AI agent
 - Microphone and speaker (built into Reachy Mini)
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! This app is open source under the Apache 2.0 license.
 
@@ -137,11 +139,11 @@ pytest
 
 Visit [mindmodel.ai](https://mindmodel.ai) and [ageai.io](https://ageai.io) to learn more about our AI projects.
 
-## 📝 License
+## License
 
 Apache License 2.0 - See [LICENSE](LICENSE) for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **[mindmodel.ai](https://mindmodel.ai)** - AI solutions and robotics innovation
 - **[ageai.io](https://ageai.io)** - Advanced AI applications and research
@@ -149,7 +151,7 @@ Apache License 2.0 - See [LICENSE](LICENSE) for details.
 - **ElevenLabs** - For their powerful Conversational AI technology
 - **Hugging Face** - For hosting and supporting the Reachy Mini ecosystem
 
-## 🔗 Links
+## Links
 
 - **[mindmodel.ai](https://mindmodel.ai)** - Explore our AI solutions
 - **[ageai.io](https://ageai.io)** - Advanced AI research and applications
@@ -157,7 +159,7 @@ Apache License 2.0 - See [LICENSE](LICENSE) for details.
 - [Reachy Mini Documentation](https://docs.pollen-robotics.com/sdk/reachy-mini/)
 - [Reachy Mini Apps](https://huggingface.co/reachy-mini-apps)
 
-## 💬 Support
+## Support
 
 - **Website**: [mindmodel.ai](https://mindmodel.ai) | [ageai.io](https://ageai.io)
 - **Issues**: Report bugs or request features on the [GitHub repository](https://github.com/mindmodel-ai/reachy_mini_elevenlabs)
@@ -165,6 +167,6 @@ Apache License 2.0 - See [LICENSE](LICENSE) for details.
 
 ---
 
-**Built with ❤️ by [mindmodel.ai](https://mindmodel.ai) & [ageai.io](https://ageai.io)**
+**Built with love by [mindmodel.ai](https://mindmodel.ai) & [ageai.io](https://ageai.io)**
 
 *Empowering robots with natural conversation - open source, community-driven, and built for the future.*
