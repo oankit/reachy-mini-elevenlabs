@@ -2,6 +2,8 @@
 
 This module manages the ElevenLabs Conversation lifecycle and coordinates
 with the audio interface, HeadWobbler, and tool registration.
+
+Get your ElevenLabs agent at: https://try.elevenlabs.io/reachy-mini-agents
 """
 
 from __future__ import annotations
@@ -15,6 +17,7 @@ from elevenlabs.conversational_ai.conversation import ClientTools, Conversation
 
 from reachy_mini_elevenlabs.audio_interface import ReachyAudioInterface
 from reachy_mini_elevenlabs.config import config
+from reachy_mini_elevenlabs.emotion_detector import EmotionDetector
 from reachy_mini_elevenlabs.tools.core_tools import ToolDependencies, register_tools
 
 if TYPE_CHECKING:
@@ -49,6 +52,7 @@ class ElevenLabsHandler:
         client: The ElevenLabs client instance.
         conversation: The active Conversation instance.
         audio_interface: The custom audio interface for robot audio.
+        emotion_detector: The emotion detector for analyzing agent responses.
         max_reconnect_attempts: Maximum number of reconnection attempts.
         initial_backoff: Initial backoff time in seconds.
         max_backoff: Maximum backoff time in seconds.
@@ -65,6 +69,7 @@ class ElevenLabsHandler:
         initial_backoff: float = DEFAULT_INITIAL_BACKOFF_SECONDS,
         max_backoff: float = DEFAULT_MAX_BACKOFF_SECONDS,
         backoff_multiplier: float = DEFAULT_BACKOFF_MULTIPLIER,
+        enable_emotion_detection: bool = True,
     ) -> None:
         """Initialize the ElevenLabs handler.
 
@@ -77,12 +82,21 @@ class ElevenLabsHandler:
             initial_backoff: Initial backoff time in seconds for reconnection.
             max_backoff: Maximum backoff time in seconds for reconnection.
             backoff_multiplier: Multiplier for exponential backoff.
+            enable_emotion_detection: Whether to enable emotion detection from text.
         """
         self.deps = deps
         self.instance_path = instance_path
         self.client: ElevenLabs | None = None
         self.conversation: Conversation | None = None
         self.audio_interface: ReachyAudioInterface | None = None
+
+        # Initialize emotion detector with config values
+        self.emotion_detector = EmotionDetector(
+            deps=deps,
+            enabled=enable_emotion_detection and config.ENABLE_EMOTION_DETECTION,
+            min_confidence=config.EMOTION_CONFIDENCE_THRESHOLD,
+            cooldown_seconds=config.EMOTION_COOLDOWN_SECONDS,
+        )
 
         # Reconnection configuration
         self.max_reconnect_attempts = max_reconnect_attempts
@@ -228,13 +242,22 @@ class ElevenLabsHandler:
     def _on_agent_response(self, response: str) -> None:
         """Callback for agent text responses.
 
-        Called when the agent produces a text response. Used for logging
-        and potentially for displaying the response in a UI.
+        Called when the agent produces a text response. Used for logging,
+        emotion detection, and potentially for displaying the response in a UI.
 
         Args:
             response: The text response from the agent.
         """
         logger.info(f"Agent: {response}")
+        
+        # Analyze response for emotions and trigger robot expressions
+        emotion_result = self.emotion_detector.analyze_and_act(response)
+        
+        if emotion_result["action_triggered"]:
+            logger.debug(
+                f"Emotion-triggered action: {emotion_result['detected_emotion']} "
+                f"(confidence: {emotion_result['confidence']:.2f})"
+            )
 
     def _on_user_transcript(self, transcript: str) -> None:
         """Callback for user speech transcripts.

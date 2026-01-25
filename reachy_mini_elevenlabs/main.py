@@ -66,7 +66,14 @@ def run(
     from reachy_mini_elevenlabs.config import config
 
     app_logger = setup_logger(args.debug)
-    app_logger.info("Starting Reachy Mini ElevenLabs App")
+    
+    # Log version information
+    try:
+        from importlib.metadata import version
+        app_version = version("reachy_mini_elevenlabs")
+        app_logger.info(f"Starting Reachy Mini ElevenLabs App v{app_version}")
+    except Exception:
+        app_logger.info("Starting Reachy Mini ElevenLabs App")
 
     # Try to load an existing instance .env first (covers subsequent runs)
     if instance_path:
@@ -173,12 +180,22 @@ def run(
         head_wobbler=head_wobbler,
     )
 
+    # Initialize idle emotion manager
+    from reachy_mini_elevenlabs.idle_emotions import IdleEmotionManager
+    idle_emotion_manager = IdleEmotionManager(
+        deps=deps,
+        enabled=config.ENABLE_IDLE_EMOTIONS,
+        min_delay=config.IDLE_EMOTION_MIN_DELAY,
+        max_delay=config.IDLE_EMOTION_MAX_DELAY,
+    )
+
     # Create ElevenLabs handler
     handler = ElevenLabsHandler(deps, instance_path=instance_path)
 
     # Start background threads
     movement_manager.start()
     head_wobbler.start()
+    idle_emotion_manager.start()  # Start idle emotions
     if camera_worker:
         camera_worker.start()
 
@@ -220,6 +237,7 @@ def run(
 
         movement_manager.stop()
         head_wobbler.stop()
+        idle_emotion_manager.stop()  # Stop idle emotions
         if camera_worker:
             camera_worker.stop()
 
@@ -247,6 +265,7 @@ class ReachyMiniElevenlabs(ReachyMiniApp):  # type: ignore[misc]
 
     """
 
+    description = "ElevenLabs Conversational AI Agents integration for Reachy Mini"
     custom_app_url = "http://0.0.0.0:7861/"
     dont_start_webserver = False
 

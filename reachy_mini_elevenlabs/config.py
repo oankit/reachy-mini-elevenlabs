@@ -2,6 +2,8 @@
 
 This module handles loading and validating configuration from environment
 variables and `.env` files using python-dotenv.
+
+Get your ElevenLabs agent at: https://try.elevenlabs.io/reachy-mini-agents
 """
 
 from __future__ import annotations
@@ -32,6 +34,16 @@ class Config:
 
         # Optional: API key (required for private agents)
         self.ELEVENLABS_API_KEY: str | None = os.getenv("ELEVENLABS_API_KEY") or None
+
+        # Emotion detection settings
+        self.ENABLE_EMOTION_DETECTION: bool = os.getenv("ENABLE_EMOTION_DETECTION", "true").lower() in ("true", "1", "yes")
+        self.EMOTION_CONFIDENCE_THRESHOLD: float = float(os.getenv("EMOTION_CONFIDENCE_THRESHOLD", "0.3"))
+        self.EMOTION_COOLDOWN_SECONDS: float = float(os.getenv("EMOTION_COOLDOWN_SECONDS", "3.0"))
+
+        # Idle emotion settings
+        self.ENABLE_IDLE_EMOTIONS: bool = os.getenv("ENABLE_IDLE_EMOTIONS", "true").lower() in ("true", "1", "yes")
+        self.IDLE_EMOTION_MIN_DELAY: float = float(os.getenv("IDLE_EMOTION_MIN_DELAY", "3.0"))
+        self.IDLE_EMOTION_MAX_DELAY: float = float(os.getenv("IDLE_EMOTION_MAX_DELAY", "8.0"))
 
     def validate(self, log_errors: bool = True) -> list[str]:
         """Return list of missing required configuration.
@@ -77,6 +89,12 @@ class Config:
         # Re-read values
         self.ELEVENLABS_AGENT_ID = os.getenv("ELEVENLABS_AGENT_ID") or None
         self.ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY") or None
+        self.ENABLE_EMOTION_DETECTION = os.getenv("ENABLE_EMOTION_DETECTION", "true").lower() in ("true", "1", "yes")
+        self.EMOTION_CONFIDENCE_THRESHOLD = float(os.getenv("EMOTION_CONFIDENCE_THRESHOLD", "0.3"))
+        self.EMOTION_COOLDOWN_SECONDS = float(os.getenv("EMOTION_COOLDOWN_SECONDS", "3.0"))
+        self.ENABLE_IDLE_EMOTIONS = os.getenv("ENABLE_IDLE_EMOTIONS", "true").lower() in ("true", "1", "yes")
+        self.IDLE_EMOTION_MIN_DELAY = float(os.getenv("IDLE_EMOTION_MIN_DELAY", "3.0"))
+        self.IDLE_EMOTION_MAX_DELAY = float(os.getenv("IDLE_EMOTION_MAX_DELAY", "8.0"))
 
 
 # Global configuration instance

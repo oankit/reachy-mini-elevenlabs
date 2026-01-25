@@ -276,8 +276,8 @@ class ReachyAudioInterface(AudioInterface):
                     self._input_callback(audio_bytes)
                     chunks_sent += 1
                     
-                    # Log audio levels periodically
-                    if chunks_sent <= 10 or chunks_sent % 50 == 0:  # Log first 10 chunks and every 50th chunk
+                    # Log audio levels only for first few chunks
+                    if chunks_sent <= 5:  # Only log first 5 chunks
                         logger.info(f"Chunk {chunks_sent}: {len(audio_data)} samples, avg level: {audio_level:.0f}, max: {max_level:.0f}")
                     
                     if chunks_sent % 100 == 0:  # Log stats every 100 chunks

@@ -4,54 +4,171 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Reachy Mini ElevenLabs – Settings</title>
-    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/style.css?v=2" />
   </head>
   <body>
-    <div class="ambient"></div>
     <div id="loading" class="loading">
       <div class="spinner"></div>
       <p>Loading…</p>
     </div>
     <div class="container">
       <header class="hero">
-        <div class="pill">Headless control</div>
+        <div class="badge">Configuration</div>
         <h1>Reachy Mini ElevenLabs</h1>
-        <p class="subtitle">Configure your ElevenLabs API key and Agent ID for voice conversations.</p>
+        <p class="subtitle">Configure your ElevenLabs credentials and emotion detection settings.</p>
       </header>
 
-      <div id="configured" class="panel hidden">
-        <div class="panel-heading">
+      <div id="configured" class="card hidden">
+        <div class="card-header">
           <div>
-            <p class="eyebrow">Credentials</p>
-            <h2>Configuration ready</h2>
+            <p class="card-label">Credentials</p>
+            <h2>ElevenLabs Connected</h2>
           </div>
-          <span class="chip chip-ok">Connected</span>
+          <span class="status-badge status-success">Connected</span>
         </div>
-        <p class="muted">ElevenLabs API key and Agent ID are configured. The conversation app is ready to run.</p>
-        <button id="change-config-btn" class="ghost">Change configuration</button>
+        <div class="card-content">
+          <div class="credential-display">
+            <div class="credential-item">
+              <span class="credential-label">Agent ID</span>
+              <span class="credential-value" id="display-agent-id">—</span>
+            </div>
+            <div class="credential-item">
+              <span class="credential-label">API Key</span>
+              <span class="credential-value" id="display-api-key">—</span>
+            </div>
+          </div>
+          <button id="change-config-btn" class="btn-secondary">Edit credentials</button>
+        </div>
       </div>
 
-      <div id="form-panel" class="panel hidden">
-        <div class="panel-heading">
+      <div id="form-panel" class="card hidden">
+        <div class="card-header">
           <div>
-            <p class="eyebrow">Credentials</p>
+            <p class="card-label">Credentials</p>
             <h2>Connect ElevenLabs</h2>
           </div>
-          <span class="chip">Required</span>
+          <span class="status-badge">Required</span>
         </div>
-        <p class="muted">Enter your ElevenLabs credentials to enable voice conversations. API key is optional for public agents.</p>
-        
-        <label for="agent-id">Agent ID <span class="required">*</span></label>
-        <input id="agent-id" type="text" placeholder="agent_..." autocomplete="off" required />
-        <p class="hint">Find your Agent ID in the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank">Conversational AI section</a>.</p>
-        
-        <label for="api-key">ElevenLabs API Key <span class="optional">(optional for public agents)</span></label>
-        <input id="api-key" type="password" placeholder="sk_..." autocomplete="off" />
-        <p class="hint">Get your API key from the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank">ElevenLabs dashboard</a>. Only required for private agents.</p>
-        
-        <div class="actions">
-          <button id="save-btn">Save configuration</button>
-          <p id="status" class="status"></p>
+        <div class="card-content">
+          <p class="text-muted">Enter your ElevenLabs credentials. You can update either field individually.</p>
+          
+          <div class="form-group">
+            <label for="agent-id">
+              Agent ID <span class="text-required">*</span>
+              <span class="text-muted-sm">(required for initial setup)</span>
+            </label>
+            <input id="agent-id" type="text" placeholder="agent_..." autocomplete="off" />
+            <p class="form-hint">Find your Agent ID in the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank">Conversational AI section</a>.</p>
+          </div>
+          
+          <div class="form-group">
+            <label for="api-key">
+              ElevenLabs API Key
+              <span class="text-muted-sm">(optional for public agents)</span>
+            </label>
+            <input id="api-key" type="password" placeholder="sk_..." autocomplete="off" />
+            <p class="form-hint">Get your API key from the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank">ElevenLabs dashboard</a>.</p>
+          </div>
+          
+          <div class="form-actions">
+            <button id="save-btn" class="btn-primary">Save configuration</button>
+            <p id="status" class="status-message"></p>
+          </div>
+        </div>
+      </div>
+
+      <div id="emotion-panel" class="card hidden">
+        <div class="card-header">
+          <div>
+            <p class="card-label">Expression</p>
+            <h2>Emotion Detection</h2>
+          </div>
+        </div>
+        <div class="card-content">
+          <p class="text-muted">Configure how the robot expresses emotions during conversations.</p>
+          
+          <div class="toggle-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="enable-emotion-detection" class="toggle-input" />
+              <span class="toggle-switch"></span>
+              <span class="toggle-content">
+                <strong>Enable Emotion Detection</strong>
+                <span class="text-muted-sm">Analyze agent responses and trigger expressive emotions</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle-label">
+              <input type="checkbox" id="enable-idle-emotions" class="toggle-input" />
+              <span class="toggle-switch"></span>
+              <span class="toggle-content">
+                <strong>Enable Idle Emotions</strong>
+                <span class="text-muted-sm">Play subtle emotions when robot is not speaking</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="slider-group">
+            <label class="slider-label">
+              <span>Emotion Confidence Threshold</span>
+              <span class="slider-value" id="confidence-value">0.30</span>
+            </label>
+            <input type="range" id="confidence-threshold" class="slider" min="0" max="1" step="0.05" value="0.3" />
+            <p class="form-hint">Higher values = more selective emotion triggering</p>
+          </div>
+
+          <div class="slider-group">
+            <label class="slider-label">
+              <span>Emotion Cooldown</span>
+              <span class="slider-value" id="cooldown-value">3.0s</span>
+            </label>
+            <input type="range" id="cooldown-seconds" class="slider" min="0" max="10" step="0.5" value="3" />
+            <p class="form-hint">Minimum time between emotion actions</p>
+          </div>
+
+          <div class="slider-group">
+            <label class="slider-label">
+              <span>Idle Emotion Min Delay</span>
+              <span class="slider-value" id="idle-min-value">3.0s</span>
+            </label>
+            <input type="range" id="idle-min-delay" class="slider" min="1" max="10" step="0.5" value="3" />
+            <p class="form-hint">Minimum time between idle emotions</p>
+          </div>
+
+          <div class="slider-group">
+            <label class="slider-label">
+              <span>Idle Emotion Max Delay</span>
+              <span class="slider-value" id="idle-max-value">8.0s</span>
+            </label>
+            <input type="range" id="idle-max-delay" class="slider" min="2" max="20" step="0.5" value="8" />
+            <p class="form-hint">Maximum time between idle emotions</p>
+          </div>
+
+          <div class="form-actions">
+            <button id="save-emotion-btn" class="btn-primary">Save emotion settings</button>
+            <p id="emotion-status" class="status-message"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card info-card">
+        <div class="card-header">
+          <div>
+            <p class="card-label">Getting Started</p>
+            <h2>Get Your ElevenLabs Agent</h2>
+          </div>
+        </div>
+        <div class="card-content">
+          <ol class="info-steps">
+            <li>Sign up at <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank" rel="noopener noreferrer">ElevenLabs</a></li>
+            <li>Create a Conversational AI agent</li>
+            <li>Copy your Agent ID</li>
+            <li>Enter it in the app settings above</li>
+          </ol>
+          <p class="text-muted">
+            Need help? Visit the <a href="https://try.elevenlabs.io/reachy-mini-agents" target="_blank" rel="noopener noreferrer">ElevenLabs Reachy Mini Agents page</a> for detailed instructions.
+          </p>
         </div>
       </div>
     </div>

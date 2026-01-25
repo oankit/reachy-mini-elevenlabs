@@ -1,6 +1,6 @@
 ---
 title: Reachy Mini ElevenLabs Conversation
-emoji: ▌▌
+emoji: 🎙️
 colorFrom: blue
 colorTo: purple
 sdk: static
@@ -16,7 +16,7 @@ tags:
   - voice-assistant
   - mindmodel
   - ageai
-short_description: ElevenLabs Conversational AI Agents for Reachy Mini by mindmodel.ai
+short_description: ElevenLabs Conversational AI Agents for Reachy Mini
 ---
 
 # Reachy Mini ElevenLabs Conversation
@@ -31,6 +31,7 @@ Transform your Reachy Mini into an intelligent conversational companion using El
 
 - **Natural Voice Conversations** - Speak naturally with your robot using ElevenLabs' state-of-the-art speech recognition
 - **Expressive Speech Synthesis** - High-quality, natural-sounding voice responses
+- **Emotion Detection** - Automatic emotion detection from agent responses triggers expressive robot movements
 - **Animated Responses** - Synchronized head movements and lip-sync animations during conversation
 - **Easy Configuration** - Simple web-based settings interface for agent setup
 - **One-Click Install** - Install directly from the Reachy Mini Control app
@@ -41,7 +42,16 @@ Transform your Reachy Mini into an intelligent conversational companion using El
 
 ## Quick Start
 
-### 1. Install the App
+### 1. Get Your ElevenLabs Agent
+
+Before installing, you'll need an ElevenLabs Conversational AI agent:
+
+1. **Sign up** at [ElevenLabs Reachy Mini Agents](https://try.elevenlabs.io/reachy-mini-agents)
+2. **Create** a Conversational AI agent
+3. **Copy** your Agent ID (starts with `agent_...`)
+4. Keep your API key handy (optional for public agents)
+
+### 2. Install the App
 
 From the Reachy Mini Control application:
 1. Navigate to the **Apps** section
@@ -63,9 +73,10 @@ You'll need an ElevenLabs Conversational AI agent:
 
 1. Start the **ElevenLabs Conversation** app from Reachy Mini Control
 2. Open the settings page at `http://localhost:7861/`
-3. Enter your **Agent ID**
+3. Enter your **Agent ID** from [ElevenLabs](https://try.elevenlabs.io/reachy-mini-agents)
 4. (Optional) Enter your **API Key** for private agents
-5. Click **Save Settings**
+5. Configure emotion detection settings (optional)
+6. Click **Save Settings**
 
 ### 4. Start Conversing!
 
@@ -92,6 +103,22 @@ Your ElevenLabs Conversational AI agent identifier. This determines the personal
 
 ### API Key (Optional)
 Only required for private agents. Public agents can be used without an API key.
+
+### Emotion Detection (Optional)
+The app automatically detects emotions from the agent's responses and triggers appropriate robot expressions:
+- **Happy** responses trigger happy animations
+- **Sad** or apologetic responses trigger sad expressions
+- **Thinking** responses make the robot look up
+- **Greetings** make the robot face forward attentively
+
+Configure emotion detection in your `.env` file:
+```bash
+ENABLE_EMOTION_DETECTION=true          # Enable/disable feature
+EMOTION_CONFIDENCE_THRESHOLD=0.3       # Sensitivity (0.0-1.0)
+EMOTION_COOLDOWN_SECONDS=3.0           # Time between actions
+```
+
+See [EMOTION_DETECTION.md](EMOTION_DETECTION.md) for detailed documentation.
 
 ## Technical Details
 
