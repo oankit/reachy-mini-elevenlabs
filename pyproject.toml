@@ -73,6 +73,7 @@ where = ["."]
 
 [tool.setuptools.package-data]
 reachy_mini_elevenlabs = [
+    "images/*",
     "static/*",
     ".env.example",
 ]

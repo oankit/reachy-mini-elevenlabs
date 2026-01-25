@@ -41,3 +41,10 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Internal documentation (keep in local repo, exclude from HuggingFace)
+ARCHITECTURE.md
+INTEGRATE_WITH_HOST.md
+README_HUGGINGFACE.md
+REPO_MAP.md
+RUN_LOCAL.md
