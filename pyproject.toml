@@ -9,7 +9,7 @@ authors = [
     { name = "mindmodel.ai", email = "contact@mindmodel.ai" },
     { name = "ageai.io", email = "contact@ageai.io" }
 ]
-description = "ElevenLabs Conversational AI for Reachy Mini by mindmodel.ai & ageai.io"
+description = "ElevenLabs Conversational AI Agents integration for Reachy Mini by mindmodel.ai & ageai.io"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }

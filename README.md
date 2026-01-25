@@ -1,6 +1,6 @@
 ---
 title: Reachy Mini ElevenLabs Conversation
-emoji: 🤖💬
+emoji: ▌▌
 colorFrom: blue
 colorTo: purple
 sdk: static
@@ -16,7 +16,7 @@ tags:
   - voice-assistant
   - mindmodel
   - ageai
-short_description: Natural voice conversations for Reachy Mini by mindmodel.ai
+short_description: ElevenLabs Conversational AI Agents for Reachy Mini by mindmodel.ai
 ---
 
 # Reachy Mini ElevenLabs Conversation
