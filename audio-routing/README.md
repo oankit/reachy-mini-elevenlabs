@@ -78,6 +78,17 @@ Then **restart the ElevenLabs app** again.
 
 ## Important Notes
 
+### No virtual environment needed
+
+These scripts are pure bash + `pactl` (a system tool). You do **not**
+need to activate the Reachy Mini Control app's virtual environment to
+run them. Just open a terminal and run them directly.
+
+The `audio-status.sh` script has an optional `sounddevice` diagnostic
+that shows what the SDK sees. It will automatically try to find the
+Reachy Mini app's venv for this check. If it can't find `sounddevice`,
+it prints a harmless notice — the audio routing still works fine.
+
 ### The app must be restarted after switching
 
 The SDK reads audio devices at startup. Switching profiles while the

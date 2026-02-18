@@ -93,7 +93,38 @@ echo ""
 
 # ---- What sounddevice sees ----
 echo "--- What the SDK Sees (sounddevice) ---"
-python3 -c "
+
+# Try to find the Reachy Mini app venv for sounddevice access.
+# The Control app installs community apps under ~/.local/share/reachy-mini/
+# or similar paths. We search common locations for a venv with sounddevice.
+PYTHON_CMD=""
+
+# Common venv locations on Reachy Mini (Lubuntu)
+VENV_SEARCH_PATHS=(
+    "$HOME/.local/share/reachy-mini/apps/reachy-mini-elevenlabs/venv/bin/python3"
+    "$HOME/.local/share/reachy-mini/venv/bin/python3"
+    "$HOME/.local/share/reachy_mini/venv/bin/python3"
+    "$HOME/reachy-mini/venv/bin/python3"
+    "/opt/reachy-mini/venv/bin/python3"
+)
+
+for venv_python in "${VENV_SEARCH_PATHS[@]}"; do
+    if [ -x "$venv_python" ] && "$venv_python" -c "import sounddevice" 2>/dev/null; then
+        PYTHON_CMD="$venv_python"
+        echo "  (using venv: $venv_python)"
+        break
+    fi
+done
+
+# Fall back to system python3
+if [ -z "$PYTHON_CMD" ]; then
+    if python3 -c "import sounddevice" 2>/dev/null; then
+        PYTHON_CMD="python3"
+    fi
+fi
+
+if [ -n "$PYTHON_CMD" ]; then
+    $PYTHON_CMD -c "
 import sounddevice as sd
 devices = sd.query_devices()
 for i, d in enumerate(devices):
@@ -109,5 +140,9 @@ for i, d in enumerate(devices):
     if d['max_output_channels'] > 0:
         io.append(f\"out:{d['max_output_channels']}\")
     print(f\"  [{i}] {d['name']}  ({', '.join(io)}){marker}\")
-" 2>/dev/null || echo "  (python3 or sounddevice not available in this shell)"
+" 2>/dev/null || echo "  (sounddevice query failed)"
+else
+    echo "  (sounddevice not available — this is OK, audio routing still works)"
+    echo "  (to enable this check, install sounddevice: pip3 install sounddevice)"
+fi
 echo ""
