@@ -356,7 +356,8 @@ def mount_settings_routes(
     # Create a minimal Gradio interface for Control App integration
     try:
         import gradio as gr
-        
+        from starlette.responses import RedirectResponse
+
         # Create a simple Gradio interface that redirects to settings
         with gr.Blocks(title="Reachy Mini ElevenLabs Settings") as gradio_ui:
             gr.Markdown("""
@@ -381,14 +382,20 @@ def mount_settings_routes(
                     ">Open Settings Panel →</a>
                 </div>
                 """)
-        
-        # Mount Gradio at root path for Control App detection
-        app = gr.mount_gradio_app(app, gradio_ui, path="/")
-        logger.info("Gradio interface mounted at root path")
-        
+
+        # Mount Gradio at /ui so FastAPI routes at /status and /elevenlabs_config
+        # are not intercepted by Gradio's catch-all ASGI handler.
+        gr.mount_gradio_app(app, gradio_ui, path="/ui")
+        logger.info("Gradio interface mounted at /ui")
+
+        # GET / -> redirect to /ui so the Control App "Open" button still works
+        @app.get("/")
+        def _root():  # type: ignore[return]
+            return RedirectResponse(url="/ui")
+
     except ImportError:
         logger.warning("Gradio not available, using fallback HTML interface")
-        
+
         # Fallback: GET / -> index.html
         @app.get("/")
         def _root() -> FileResponse:
