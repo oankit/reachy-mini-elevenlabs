@@ -265,6 +265,8 @@ class ReachyAudioInterface(AudioInterface):
                     if needs_resampling:
                         from scipy.signal import resample
                         target_length = int(len(audio_data) * INPUT_SAMPLE_RATE / robot_sample_rate)
+                        if target_length < 1:
+                            continue
                         audio_data = resample(audio_data, target_length).astype(np.int16)
                     
                     # Check audio levels to verify we're sending actual sound
