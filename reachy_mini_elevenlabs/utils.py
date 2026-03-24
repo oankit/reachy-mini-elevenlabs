@@ -46,6 +46,12 @@ def parse_args() -> tuple[argparse.Namespace, list[str]]:
         action="store_true",
         help="Disable camera usage",
     )
+    parser.add_argument(
+        "--gradio",
+        default=False,
+        action="store_true",
+        help="Open Gradio settings interface",
+    )
     return parser.parse_known_args()
 
 

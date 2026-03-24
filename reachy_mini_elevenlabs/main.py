@@ -88,8 +88,28 @@ def run(
         except Exception:
             pass
 
-    # Mount settings UI if a settings app is available
-    if settings_app is not None:
+    # Launch settings UI web server when --gradio is used from CLI
+    if args.gradio and settings_app is None:
+        try:
+            import uvicorn
+            from fastapi import FastAPI
+            from reachy_mini_elevenlabs.settings_ui import mount_settings_routes
+
+            settings_app = FastAPI()
+            mount_settings_routes(settings_app, instance_path)
+            uvicorn_thread = threading.Thread(
+                target=uvicorn.run,
+                args=(settings_app,),
+                kwargs={"host": "0.0.0.0", "port": 7861, "log_level": "warning"},
+                daemon=True,
+            )
+            uvicorn_thread.start()
+            app_logger.info("Settings UI available at http://localhost:7861/")
+        except Exception as e:
+            app_logger.warning(f"Failed to start settings UI server: {e}")
+
+    # Mount settings UI if a settings app was provided by the host system
+    elif settings_app is not None:
         try:
             from reachy_mini_elevenlabs.settings_ui import mount_settings_routes
 
@@ -131,6 +151,9 @@ def run(
             robot_kwargs: dict[str, str] = {}
             if args.robot_name is not None:
                 robot_kwargs["robot_name"] = args.robot_name
+
+            if args.no_camera:
+                robot_kwargs["media_backend"] = "gstreamer_no_video"
 
             app_logger.info("Initializing ReachyMini (SDK will auto-detect appropriate backend)")
             robot = ReachyMini(**robot_kwargs)
