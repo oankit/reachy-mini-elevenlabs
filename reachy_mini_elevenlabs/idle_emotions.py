@@ -42,8 +42,6 @@ IDLE_EMOTIONS = [
     "understanding2",
     "indifferent1",
     "curious1",
-    "boredom1",
-    "boredom2",
     "attentive1",
     "attentive2",
     "shy1",
@@ -163,7 +161,8 @@ class IdleEmotionManager:
         """Check if we should queue a new idle emotion.
 
         Returns:
-            True if enough time has passed and the robot is idle.
+            True if enough time has passed and the robot is truly idle
+            (no move playing AND no moves queued).
         """
         if not self.enabled:
             return False
@@ -178,14 +177,22 @@ class IdleEmotionManager:
         if time_since_last < target_delay:
             return False
 
-        # Check if movement manager is idle (no moves queued)
+        # Check if movement manager is truly idle:
+        # - No move currently playing
+        # - No moves waiting in the queue
         try:
-            # Check if the move queue is empty
-            if hasattr(self.deps.movement_manager, 'move_queue'):
-                if len(self.deps.movement_manager.move_queue) > 0:
+            mm = self.deps.movement_manager
+            # Check if a move is currently playing
+            if hasattr(mm, 'state') and mm.state.current_move is not None:
+                from reachy_mini_elevenlabs.moves import BreathingMove
+                # Breathing is idle behaviour, don't block on it
+                if not isinstance(mm.state.current_move, BreathingMove):
                     return False
+            # Check if moves are queued
+            if hasattr(mm, 'move_queue') and len(mm.move_queue) > 0:
+                return False
         except Exception as e:
-            logger.debug(f"Could not check move queue: {e}")
+            logger.debug(f"Could not check movement state: {e}")
 
         return True
 

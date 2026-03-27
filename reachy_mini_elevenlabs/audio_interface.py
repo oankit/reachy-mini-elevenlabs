@@ -69,6 +69,10 @@ class ReachyAudioInterface(AudioInterface):
         self._input_thread: threading.Thread | None = None
         self._stop_event = threading.Event()
 
+        # Echo suppression: track when robot is speaking so we can mute mic input
+        self._last_output_time: float = 0.0
+        self._echo_suppression_tail_s: float = 0.3  # keep muting 300ms after last output
+
     def start(self, input_callback: Callable[[bytes], None]) -> None:
         """Start audio capture from robot microphone.
 
@@ -143,6 +147,9 @@ class ReachyAudioInterface(AudioInterface):
         """
         if not audio:
             return
+
+        # Mark that we're outputting audio (for echo suppression)
+        self._last_output_time = time.monotonic()
 
         # Convert to numpy array for processing
         audio_array = np.frombuffer(audio, dtype=np.int16)
@@ -269,6 +276,11 @@ class ReachyAudioInterface(AudioInterface):
                             continue
                         audio_data = resample(audio_data, target_length).astype(np.int16)
                     
+                    # Echo suppression: send silence while robot is speaking
+                    time_since_output = time.monotonic() - self._last_output_time
+                    if self._last_output_time > 0 and time_since_output < self._echo_suppression_tail_s:
+                        audio_data = np.zeros_like(audio_data)
+
                     # Check audio levels to verify we're sending actual sound
                     audio_level = np.abs(audio_data).mean()
                     max_level = np.abs(audio_data).max()

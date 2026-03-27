@@ -45,6 +45,10 @@ class Config:
         self.IDLE_EMOTION_MIN_DELAY: float = float(os.getenv("IDLE_EMOTION_MIN_DELAY", "3.0"))
         self.IDLE_EMOTION_MAX_DELAY: float = float(os.getenv("IDLE_EMOTION_MAX_DELAY", "8.0"))
 
+        # Personality for weighted emotion arbitration
+        # Values: "sarcastic", "motivational", "neutral", "drill_sergeant", or empty for no weighting
+        self.PERSONALITY: str | None = os.getenv("PERSONALITY") or None
+
     def validate(self, log_errors: bool = True) -> list[str]:
         """Return list of missing required configuration.
 
@@ -95,6 +99,7 @@ class Config:
         self.ENABLE_IDLE_EMOTIONS = os.getenv("ENABLE_IDLE_EMOTIONS", "true").lower() in ("true", "1", "yes")
         self.IDLE_EMOTION_MIN_DELAY = float(os.getenv("IDLE_EMOTION_MIN_DELAY", "3.0"))
         self.IDLE_EMOTION_MAX_DELAY = float(os.getenv("IDLE_EMOTION_MAX_DELAY", "8.0"))
+        self.PERSONALITY = os.getenv("PERSONALITY") or None
 
 
 # Global configuration instance

@@ -90,12 +90,13 @@ class ElevenLabsHandler:
         self.conversation: Conversation | None = None
         self.audio_interface: ReachyAudioInterface | None = None
 
-        # Initialize emotion detector with config values
+        # Initialize emotion detector with config values and personality weights
         self.emotion_detector = EmotionDetector(
             deps=deps,
             enabled=enable_emotion_detection and config.ENABLE_EMOTION_DETECTION,
             min_confidence=config.EMOTION_CONFIDENCE_THRESHOLD,
             cooldown_seconds=config.EMOTION_COOLDOWN_SECONDS,
+            personality=config.PERSONALITY,
         )
 
         # Reconnection configuration
@@ -134,7 +135,10 @@ class ElevenLabsHandler:
                 logger.error(f"  - {item}")
             raise ValueError(error_msg)
 
-        logger.info("Starting ElevenLabs conversation handler")
+        logger.info(
+            "Starting ElevenLabs conversation handler "
+            f"(personality={config.PERSONALITY or 'none'})"
+        )
         self._stop_requested = False
 
         # Create ElevenLabs client
