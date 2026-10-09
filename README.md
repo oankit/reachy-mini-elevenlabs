@@ -38,7 +38,30 @@ Transform your Reachy Mini into an intelligent conversational companion using El
 
 ## Demo
 
-[Add a demo video or GIF here showing the robot having a conversation]
+### Featured: Sarcastic Megatron
+
+Watch Reachy Mini deliver accountability coaching with sarcasm, dry humor, and expressive robot movements.
+
+[![Watch the sarcastic Megatron robot demo](https://img.youtube.com/vi/3ASY7u5G7-U/hqdefault.jpg)](https://youtu.be/3ASY7u5G7-U)
+
+**[Watch the sarcastic coach demo on YouTube](https://youtu.be/3ASY7u5G7-U)**
+
+### Compare the Three Coaching Styles
+
+| Coaching style | Demo |
+| --- | --- |
+| **Sarcastic (Megatron)** | [Watch demo](https://youtu.be/3ASY7u5G7-U) |
+| **Motivational** | [Watch demo](https://youtu.be/Hil7GkhlX34) |
+| **Neutral** | [Watch demo](https://youtu.be/jJTMjFDXErQ) |
+
+## Project Report
+
+This ECE 787 Social Robotics project at the University of Waterloo compares verbal and non-verbal communication styles in an LLM-powered accountability robot. The three coaching personalities combine ElevenLabs conversational agents with personality-specific weighted arbitration of the robot's expressive behaviors.
+
+**[Read the full project report (PDF)](docs/ECE787_Project_Report_Omar_Ankit.pdf)**  
+*Comparing Verbal and Non-Verbal Communication Styles in an LLM-Powered Accountability Robot* — Omar Ankit.
+
+The report includes the implementation, a video-based user study with 39 participants, results, and appendices. The motivational coach received the highest likability ratings, while the sarcastic coach received the highest entertainment ratings.
 
 ## Quick Start
 
