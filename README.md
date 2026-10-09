@@ -1,5 +1,5 @@
 ---
-title: Reachy Mini ElevenLabs Conversation
+title: Reachy Mini Accountability Coach
 emoji: 🎙️
 colorFrom: blue
 colorTo: purple
@@ -19,7 +19,7 @@ tags:
 short_description: ElevenLabs Conversational AI Agents for Reachy Mini
 ---
 
-# Reachy Mini ElevenLabs Conversation
+# Reachy Mini Accountability Coach
 
 **By [mindmodel.ai](https://mindmodel.ai) & [ageai.io](https://ageai.io)**
 
@@ -217,8 +217,8 @@ Contributions are welcome! This app is open source under the Apache 2.0 license.
 
 ```bash
 # Clone the repository
-git clone https://huggingface.co/spaces/mindmodel-ai/reachy_mini_elevenlabs
-cd reachy_mini_elevenlabs
+git clone https://github.com/oankit/reachy-mini-accountability-coach.git
+cd reachy-mini-accountability-coach
 
 # Install in development mode
 pip install -e ".[dev]"
