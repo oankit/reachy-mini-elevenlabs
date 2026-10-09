@@ -27,6 +27,12 @@ Transform your Reachy Mini into an intelligent conversational companion using El
 
 > Open source project from the teams at mindmodel.ai and ageai.io - building the future of AI-powered robotics.
 
+<p align="center">
+  <img src="assets/project/reachy-mini.jpg" alt="Physical Reachy Mini robot on a desk during the accountability coaching study" width="650">
+</p>
+
+*Reachy Mini in the study's desk-based interaction setting (project report, Figure 1).*
+
 ## Features
 
 - **Natural Voice Conversations** - Speak naturally with your robot using ElevenLabs' state-of-the-art speech recognition
@@ -48,6 +54,13 @@ Watch Reachy Mini deliver accountability coaching with sarcasm, dry humor, and e
 
 ### Compare the Three Coaching Styles
 
+| Sarcastic (Megatron) | Motivational | Neutral |
+| --- | --- | --- |
+| [![Sarcastic coach simulator frame](assets/project/sarcastic-frame.jpg)](https://youtu.be/3ASY7u5G7-U) | [![Motivational coach simulator frame](assets/project/motivational-frame.jpg)](https://youtu.be/Hil7GkhlX34) | [![Neutral coach simulator frame](assets/project/neutral-frame.jpg)](https://youtu.be/jJTMjFDXErQ) |
+
+*Frames from the supplied demo recordings, shown in the Reachy Mini simulator. Click an image to watch that coaching style.*
+
+
 | Coaching style | Demo |
 | --- | --- |
 | **Sarcastic (Megatron)** | [Watch demo](https://youtu.be/3ASY7u5G7-U) |
@@ -62,6 +75,33 @@ This ECE 787 Social Robotics project at the University of Waterloo compares verb
 *Comparing Verbal and Non-Verbal Communication Styles in an LLM-Powered Accountability Robot* — Omar Ankit.
 
 The report includes the implementation, a video-based user study with 39 participants, results, and appendices. The motivational coach received the highest likability ratings, while the sarcastic coach received the highest entertainment ratings.
+
+### System Architecture
+
+![Voice pipeline and personality-weighted arbitration for expressive robot movement](assets/project/system-architecture.png)
+
+*Figure 3 from the report: ElevenLabs handles speech recognition, response generation, and speech synthesis. The on-device emotion detector and personality-weighted arbitration select behaviors, which the movement manager combines with audio-reactive motion.*
+
+### Expressive Robot Poses
+
+<p align="center">
+  <img src="assets/project/expressive-poses.jpg" alt="Physical Reachy Mini showing a curious tilted-head pose and a rotated dance pose" width="560">
+</p>
+
+*Figure 4 from the report: “Curious” (left) and “Dance” (right), illustrating the robot's non-verbal behavior.*
+
+### Study Results
+
+![Entertainment and motivation mean ratings for neutral, sarcastic, and motivational coaching styles](assets/project/entertainment-motivation.png)
+
+*Figure 6 from the report: mean ratings on a 1–5 scale in the video-based study (N = 39). Sarcastic coaching scored highest on entertainment (3.69); motivational coaching scored highest on motivation (3.72).*
+
+| Measure (1–5) | Neutral | Sarcastic | Motivational |
+| --- | --- | --- | --- |
+| Entertainment | 2.97 | **3.69** | 3.54 |
+| Motivation | 2.72 | 3.08 | **3.72** |
+
+See the [full report](docs/ECE787_Project_Report_Omar_Ankit.pdf) for statistical comparisons and study limitations. Report images are extracted from Figures 1, 3, 4, and 6; demo images are frames from the supplied recordings.
 
 ## Quick Start
 
