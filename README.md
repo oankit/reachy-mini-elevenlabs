@@ -217,8 +217,8 @@ Contributions are welcome! This app is open source under the Apache 2.0 license.
 
 ```bash
 # Clone the repository
-git clone https://github.com/oankit/reachy-mini-accountability-coach.git
-cd reachy-mini-accountability-coach
+git clone https://github.com/oankit/reachy-mini-elevenlabs.git
+cd reachy-mini-elevenlabs
 
 # Install in development mode
 pip install -e ".[dev]"
